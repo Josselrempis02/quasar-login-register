@@ -1,51 +1,83 @@
 <template>
-  <div class="fixed-center q-pa-xl border-2 border-rounded">
+  <div class="fixed-center q-pa-xl border-rounded full-width" style="max-width: 500px;">
     <div class="login-form">
       <h1 class="text-h3 text-center">Login</h1>
       <form>
-        <div class="q-pa-s" style="max-width: 300px">
+        <div class="q-pa-s">
           <q-input
             filled
-            v-model="text"
-            label="Email"
-            style="width: 100%;" 
+            v-model="email"
+            label="Email Address"
+            class="q-mb-md"
+            color="orange-7"
           />
         </div>
-        <div class="form-group" style="max-width: 300px;">
+        <div class="q-pa-s">
           <q-input
             filled
-            v-model="text1"
+            v-model="password"
             label="Password"
-            style="width: 100%;" 
+            type="password"
+            class="q-mb-sm"
+            color="orange-7"
+          />
+          <q-checkbox 
+            v-model="showPassword"
+            label="Show Password"
+            class="q-mb-sm"
+            color="orange-7"
           />
         </div>
-        <button type="submit">Login</button>
+        <q-btn 
+          color="primary"
+          label="Login" 
+          class="full-width custom-hover"
+        />
       </form>
+      
+      <div class="text-center q-mt-md">
+        <span>Don't have an account?</span>
+        <q-btn 
+          flat
+          color="primary"
+          label="Sign up"
+          @click="goToSignUp"
+        />
+      </div>
     </div>
   </div>
 </template>
 
-  
+
 <script setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 defineOptions({
   name: 'UserLogin'
 });
 
-const text = ref('')
+const email = ref('');
+const password = ref('');
+const showPassword = ref(false);
+
+const router = useRouter();
+
+// Navigate to signup page
+const goToSignUp = () => {
+  router.push('/signup');
+};
 </script>
 
-  
-  <style>
-  .border-rounded {
+<style>
+.border-rounded {
   border-color: black;
-  border-style:  solid;
+  border-style: solid;
   border-radius: 10px;
 }
 
-
-  
-  
-  </style>
-  
+.custom-hover:hover {
+  background-color: #1565c0; /* Darker primary color for hover effect */
+  color: white;
+}
+</style>
